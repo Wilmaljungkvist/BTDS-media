@@ -11,16 +11,38 @@
           <a class="nav-link" href="/straight-up">Straight up</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/cutting-edge">Cutting edge</a>
+          <a class="nav-link" href="/the-cutting-edge">The Cutting edge</a>
         </li>
       </ul>
     </div>
-    <% } else { %>
-      <a class="navbar-brand" href="/">1DV027-WT1</a>
+    <% } else if (type === 'straight-up') { %>
+      <a class="navbar-brand" href="/"><%= logo %> </a>
     <div class="collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="/redirect">Login with gitlab</a>
+          <a class="nav-link" href="/straight-up">Hem</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/straight-up/avsnitt">Avsnitt</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/">BDTS media</a>
+        </li>
+      </ul>
+    </div> 
+
+    <% } else if (type === 'cutting-edge') { %>
+      <a class="navbar-brand" href="/"><%= logo %> </a>
+    <div class="collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/the-cutting-edge">Hem</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/the-cutting-edge/avsnitt">Avsnitt</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/">BDTS media</a>
         </li>
       </ul>
     </div> 
