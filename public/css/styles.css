@@ -198,4 +198,64 @@
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+
+.contact h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.contact form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact .form-group {
+  margin-bottom: 20px;
+}
+
+.contact label {
+  font-weight: bold;
+}
+
+.contact input[type="text"],
+.contact input[type="email"],
+.contact textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.contact input[type="radio"] {
+  margin-right: 10px;
+}
+
+.contact input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.contact input[type="submit"]:hover {
+  background-color: #555;
+}
+
+.contact p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.contact a {
+  color: #333;
+  text-decoration: underline;
+}
+
+.contact a:hover {
+  color: #555;
+}
   
