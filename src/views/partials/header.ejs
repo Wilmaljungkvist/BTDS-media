@@ -1,7 +1,7 @@
 <header>
   <nav class="navbar">
     <% if (type === 'home') { %>
-    <a class="navbar-brand" href="/"><%= logo %></a>
+    <a class="navbar-brand" href="/"><img src="<%= logo %>" alt="" height="60"></a>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item">
@@ -16,7 +16,7 @@
       </ul>
     </div>
     <% } else { %>
-      <a class="navbar-brand" href="/"><%= logo %></a>
+      <a class="navbar-brand" href="/"> <img src="<%= logo %>" alt="" height="60"></a>
       <div class="collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item">

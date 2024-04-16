@@ -9,7 +9,7 @@ export class PodcastController {
      */
     async index(req, res, next) {
       try {
-        const logo = 'Straight up'
+        const logo = '/img/IMG_8196.PNG'
         const type = 'straight-up'
         res.render('home/index', { logo, type })
       } catch (error) {
@@ -19,7 +19,7 @@ export class PodcastController {
   
     async homeCuttingEdge(req, res, next) {
       try {
-        const logo = 'The Cutting Edge'
+        const logo = '/img/Cuttingedge.png'
         const type = 'the-cutting-edge'
         res.render('home/index', { logo, type })
       } catch (error) {
