@@ -11,7 +11,17 @@ export class PodcastController {
       try {
         const logo = '/img/IMG_8196.PNG'
         const type = 'straight-up'
-        res.render('home/index', { logo, type })
+        res.render('straightUp/index', { logo, type })
+      } catch (error) {
+        next(error)
+      }
+    }
+
+    async straightUpEpisodes(req, res, next) {
+      try {
+        const logo = '/img/IMG_8196.PNG'
+        const type = 'straight-up'
+        res.render('straightUp/episodes', { logo, type })
       } catch (error) {
         next(error)
       }
