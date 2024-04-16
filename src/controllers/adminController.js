@@ -20,14 +20,14 @@ export class AdminController {
       try {
         const logo = '/img/BDTSMedia.png'
         let type = 'home'
-        res.render('home/index', { logo, type })
+        res.render('admin/index', { logo, type })
       } catch (error) {
         next(error)
       }
     }
     // TODO: CSS FOR PHONES.
   
-    async information(req, res, next) {
+    async loginAdmin(req, res, next) {
       try {
         const logo = '/img/BDTSMedia.png'
         let type = 'home'
