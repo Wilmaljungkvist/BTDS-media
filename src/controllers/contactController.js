@@ -6,7 +6,7 @@ export class ContactController {
             const { fname, email, contactType, message } = req.body
 
             const transporter = nodemailer.createTransport({
-                host: 'smtp-mail.outlook.com',
+                host: 'smtp.gmail.com',
                 port: 587,
                 secure: false,
                 auth: {
@@ -17,7 +17,7 @@ export class ContactController {
 
             const mailOptions = {
                 from: process.env.EMAIL,
-                to: process.env.EMAIL,
+                to: process.env.RECIVE_EMAIL,
                 subject: 'New message from your website',
                 text: `
                     Name: ${fname}
@@ -30,7 +30,8 @@ export class ContactController {
             transporter.sendMail(mailOptions, (error, info) => {
                 if (error) {
                     console.error('Error:', error)
-                    res.status(500).send('Failed to send email')
+                    req.session.flash = { type: 'danger', text: 'Formulär kunde inte skickas' }
+                    res.redirect('/')
                 } else {
                     console.log('Email sent:', info.response)
                     req.session.flash = { type: 'success', text: 'Formulär skickades korrekt!' }
