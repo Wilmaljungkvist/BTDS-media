@@ -31,7 +31,18 @@ export class PodcastController {
       try {
         const logo = '/img/Cuttingedge.png'
         const type = 'the-cutting-edge'
-        res.render('home/index', { logo, type })
+        res.render('cuttingEdge/index', { logo, type })
+      } catch (error) {
+        next(error)
+      }
+    }
+
+
+    async cuttingEdgeEpisodes(req, res, next) {
+      try {
+        const logo = '/img/Cuttingedge.png'
+        const type = 'the-cutting-edge'
+        res.render('cuttingEdge/episodes', { logo, type })
       } catch (error) {
         next(error)
       }
