@@ -26,4 +26,15 @@ export class HomeController {
     }
   }
   // TODO: CSS FOR PHONES.
+
+  async information(req, res, next) {
+    try {
+      const logo = '/img/BDTSMedia.png'
+      let type = 'home'
+      res.render('information/index', { logo, type })
+
+    } catch (error) {
+      next(error)
+    }
+  }
 }
