@@ -5,7 +5,7 @@
 
   <div class="contact">
     <h2>Kontakta oss - Straight Up</h2>
-    <form action="#" method="post">
+    <form action="/submit-form" method="post">
         <div class="form-group">
             <label for="fname">Namn:</label><br>
             <input type="text" id="fname" name="fname" required><br>
@@ -26,6 +26,7 @@
         </div>
         <div class="form-group"> 
           <p>Genom att skicka detta formulär godkänner du sparandet av inskrivna uppgifter. Du kan läsa mer <a href="">Här!</a></p><br>
+          <input type="hidden" name="recipientEmail" value="<%= process.env.BDTS_EMAIL %>">
             <input type="submit" value="Skicka">
         </div>
     </form>

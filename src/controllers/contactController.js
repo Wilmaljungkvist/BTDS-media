@@ -3,7 +3,8 @@ import nodemailer from 'nodemailer'
 export class ContactController {
     async sendForm(req, res, next) {
         try {
-            const { fname, email, contactType, message } = req.body
+            const { fname, email, contactType, message, recipientEmail } = req.body
+            console.log(recipientEmail)
 
             const transporter = nodemailer.createTransport({
                 host: 'smtp.gmail.com',
@@ -17,7 +18,7 @@ export class ContactController {
 
             const mailOptions = {
                 from: process.env.EMAIL,
-                to: process.env.RECIVE_EMAIL,
+                to: recipientEmail,
                 subject: 'New message from your website',
                 text: `
                     Name: ${fname}
@@ -25,7 +26,7 @@ export class ContactController {
                     Contact Type: ${contactType}
                     Message: ${message}
                 `
-            };
+            }
 
             transporter.sendMail(mailOptions, (error, info) => {
                 if (error) {
