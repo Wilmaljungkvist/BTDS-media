@@ -9,9 +9,19 @@ export class PodcastController {
      */
     async index(req, res, next) {
       try {
-        const logo = 'Straight up'
+        const logo = '/img/IMG_8196.PNG'
         const type = 'straight-up'
-        res.render('home/index', { logo, type })
+        res.render('straightUp/index', { logo, type })
+      } catch (error) {
+        next(error)
+      }
+    }
+
+    async straightUpEpisodes(req, res, next) {
+      try {
+        const logo = '/img/IMG_8196.PNG'
+        const type = 'straight-up'
+        res.render('straightUp/episodes', { logo, type })
       } catch (error) {
         next(error)
       }
@@ -19,9 +29,20 @@ export class PodcastController {
   
     async homeCuttingEdge(req, res, next) {
       try {
-        const logo = 'The Cutting Edge'
+        const logo = '/img/Cuttingedge.png'
         const type = 'the-cutting-edge'
-        res.render('home/index', { logo, type })
+        res.render('cuttingEdge/index', { logo, type })
+      } catch (error) {
+        next(error)
+      }
+    }
+
+
+    async cuttingEdgeEpisodes(req, res, next) {
+      try {
+        const logo = '/img/Cuttingedge.png'
+        const type = 'the-cutting-edge'
+        res.render('cuttingEdge/episodes', { logo, type })
       } catch (error) {
         next(error)
       }

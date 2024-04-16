@@ -18,11 +18,12 @@ export class HomeController {
    */
   async index (req, res, next) {
     try {
-      const logo = 'BDTS media'
+      const logo = '/img/BDTSMedia.png'
       let type = 'home'
       res.render('home/index', { logo, type })
     } catch (error) {
       next(error)
     }
   }
+  // TODO: CSS FOR PHONES.
 }
