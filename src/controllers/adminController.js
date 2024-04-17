@@ -4,6 +4,7 @@
  * @author Wilma Ljungkvist
  */
 
+import AuthModel from '../models/AuthModel.js'
 /**
  * Encapsulates a controller.
  */
@@ -37,5 +38,23 @@ export class AdminController {
         next(error)
       }
     }
+
+    async registerUser(req, res, next) {
+        try {
+            const userData = {
+              firstName: 'John',
+              lastName: 'Doe',
+              email: 'john@example.com',
+              username: 'johndoe',
+              password: 'password123'
+            }
+        
+            const userId = await AuthModel.register(userData)
+        
+            console.log('User added successfully! User ID:', userId)
+          } catch (error) {
+            console.error('Error adding user:', error)
+          }
+        }
   }
   

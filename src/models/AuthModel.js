@@ -1,64 +1,49 @@
+import { connectDB } from '../config/mysql.js'
+
 import bcrypt from 'bcrypt'
-import mongoose from 'mongoose'
-import validator from 'validator'
-import { BASE_SCHEMA } from './baseSchema.js'
 
-const { isEmail } = validator
+const AuthModel = {}
 
-const schema = new mongoose.Schema({
-  firstName: {
-    type: String,
-    required: [true, 'First name is required.'],
-    trim: true
-  },
-  lastName: {
-    type: String,
-    required: [true, 'Last name is required.'],
-    trim: true
-  },
-  email: {
-    type: String,
-    required: [true, 'Email address is required.'],
-    unique: true,
-    lowercase: true,
-    trim: true,
-    validate: [isEmail, 'Please provide a valid email address.']
-  },
-  username: {
-    type: String,
-    required: [true, 'Username is required.'],
-    unique: true,
-    match: [/^[A-Za-z][A-Za-z0-9_-]{2,255}$/, 'Please provide a valid username.']
-  },
-  password: {
-    type: String,
-    required: [true, 'Password is required.'],
-    minLength: [10, 'The password must be of minimum length 10 characters.'],
-    maxLength: [256, 'The password must be of maximum length 256 characters.']
-  }
-})
+AuthModel.register = async function (userData) {
+  const { firstName, lastName, email, username, password } = userData
 
-schema.add(BASE_SCHEMA)
+  const hashedPassword = await bcrypt.hash(password, 10);
 
-schema.pre('save', async function () {
-  this.password = await bcrypt.hash(this.password, 10)
-})
+  const createUserQuery = `INSERT INTO users (firstName, lastName, email, username, password) VALUES (?, ?, ?, ?, ?)`
+  const values = [firstName, lastName, email, username, hashedPassword]
 
-/**
- * Authenticates a user.
- *
- * @param {string} username - The username.
- * @param {string} password - The password.
- * @returns {Promise<UserModel>} A promise that resolves with the user if authentication was successful.
- */
-schema.statics.authenticate = async function (username, password) {
-  const userDocument = await this.findOne({ username })
-
-  if (!userDocument || !(await bcrypt.compare(password, userDocument?.password))) {
-    throw new Error('Invalid credentials.')
-  }
-
-  return userDocument
+  return new Promise((resolve, reject) => {
+    connectDB.query(createUserQuery, values, (err, results) => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(results.insertId)
+      }
+    })
+  })
 }
 
-export const UserModel = mongoose.model('User', schema)
+AuthModel.authenticate = async function (username, password) {
+  const getUserQuery = `SELECT * FROM users WHERE username = ?`
+  return new Promise((resolve, reject) => {
+    connectDB.query(getUserQuery, [username], async (err, results) => {
+      if (err) {
+        reject(err)
+      } else {
+        if (results.length === 0) {
+          reject(new Error('User not found'))
+        } else {
+          const user = results[0]
+          const isPasswordValid = await bcrypt.compare(password, user.password)
+          if (isPasswordValid) {
+            resolve(user)
+          } else {
+            reject(new Error('Invalid password'))
+          }
+        }
+      }
+    })
+  })
+}
+
+export default AuthModel
