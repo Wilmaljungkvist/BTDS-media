@@ -1,0 +1,27 @@
+<h1>Contact List</h1>
+        <% if (contactGet.length > 0) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Contact Type</th>
+                        <th>Message</th>
+                        <th>Recipient Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% contactGet.forEach(contact => { %>
+                        <tr>
+                            <td><%= contact.fname %></td>
+                            <td><%= contact.email %></td>
+                            <td><%= contact.contactType %></td>
+                            <td><%= contact.message %></td>
+                            <td><%= contact.recipientEmail %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>No contacts available.</p>
+        <% } %>

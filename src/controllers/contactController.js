@@ -6,12 +6,8 @@ export class ContactController {
         try {
             // TODO: Email ska vara frivilligt att fylla i. 
             const { fname, email, contactType, message, recipientEmail } = req.body
-            console.log(recipientEmail)
 
             const contact = await ContactModel.addContact(req.body)
-            console.log(contact)
-            const contactGet = await ContactModel.getContact()
-            console.log(contactGet)
 
             const transporter = nodemailer.createTransport({
                 host: 'smtp.gmail.com',
@@ -49,5 +45,14 @@ export class ContactController {
         } catch (error) {
             next(error)
         }
+    }
+
+    async getContacts(req, res, next) {
+        const contactGet = await ContactModel.getContact()
+
+        const logo = '/img/BDTSMedia.png'
+        let type = 'home'
+        res.render('admin/contacts', { logo, type, contactGet })
+         
     }
 }
