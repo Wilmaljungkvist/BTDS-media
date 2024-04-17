@@ -52,9 +52,9 @@ export class ContactController {
 
         const translatedContacts = contactGet.map(contact => {
             if (contact.contactType === 'podRequest') {
-                contact.contactType = 'önskemål'
+                contact.contactType = 'Önskemål'
             } else if (contact.contactType === 'question') {
-                contact.contactType = 'fråga'
+                contact.contactType = 'Fråga'
             }
             return contact
         })
