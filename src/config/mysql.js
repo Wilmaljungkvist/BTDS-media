@@ -19,7 +19,8 @@ const initializeDB = () => {
         console.log('Connected to MariaDB!')
 
         const sqlCreateDB = fs.readFileSync('src/config/createDatabase.sql', 'utf8')
-        const sqlCreateTable = fs.readFileSync('src/config/createTable.sql', 'utf8')
+        const sqlCreateUsersTable = fs.readFileSync('src/config/createUsersTable.sql', 'utf8')
+        const sqlCreateContactsTable = fs.readFileSync('src/config/createContactsTable.sql', 'utf8')
 
         connection.query(sqlCreateDB, (err, results) => {
           if (err) {
@@ -28,16 +29,25 @@ const initializeDB = () => {
           } else {
             console.log('Database created successfully!')
 
-            connection.query(sqlCreateTable, (err, results) => {
+            connection.query(sqlCreateUsersTable, (err, results) => {
               if (err) {
-                console.error('Error creating tables:', err)
+                console.error('Error creating User table:', err)
                 reject(err)
               } else {
-                console.log('Tables created successfully!')
-                connection.release()
-                resolve()
+                console.log('Users table created successfully!')
               }
             })
+
+            connection.query(sqlCreateContactsTable, (err, results) => {
+                if (err) {
+                  console.error('Error creating contacts table:', err)
+                  reject(err)
+                } else {
+                  console.log('Contacts table created successfully!')
+                  connection.release()
+                  resolve()
+                }
+              })
           }
         })
       }

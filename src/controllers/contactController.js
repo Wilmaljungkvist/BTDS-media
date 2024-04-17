@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer'
+import ContactModel from '../models/contactModel.js'
 
 export class ContactController {
     async sendForm(req, res, next) {
@@ -6,6 +7,11 @@ export class ContactController {
             // TODO: Email ska vara frivilligt att fylla i. 
             const { fname, email, contactType, message, recipientEmail } = req.body
             console.log(recipientEmail)
+
+            const contact = await ContactModel.addContact(req.body)
+            console.log(contact)
+            const contactGet = await ContactModel.getContact()
+            console.log(contactGet)
 
             const transporter = nodemailer.createTransport({
                 host: 'smtp.gmail.com',
