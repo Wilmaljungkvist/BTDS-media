@@ -50,6 +50,18 @@ export class ContactController {
     async getContacts(req, res, next) {
         const contactGet = await ContactModel.getContact()
 
+        const translatedContacts = contactGet.map(contact => {
+            if (contact.contactType === 'podRequest') {
+                contact.contactType = 'önskemål'
+            } else if (contact.contactType === 'question') {
+                contact.contactType = 'fråga'
+            }
+            return contact
+        })
+
+        console.log(translatedContacts)
+
+
         const logo = '/img/BDTSMedia.png'
         let type = 'home'
         res.render('admin/contacts', { logo, type, contactGet })

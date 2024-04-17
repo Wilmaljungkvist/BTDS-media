@@ -272,4 +272,47 @@
 }
 
 
+.contact-list {
+  margin: 0 auto;
+  margin-top: 50px; 
+  margin-bottom: 50px; 
+  max-width: 800px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-list h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.contact-list table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.contact-list th, .contact-list td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.contact-list th {
+  background-color: #f0f0f0;
+}
+
+.contact-list tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.contact-list p {
+  text-align: center;
+  font-size: 18px;
+  color: #999;
+}
+
+
   
