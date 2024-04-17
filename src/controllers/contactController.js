@@ -3,6 +3,7 @@ import nodemailer from 'nodemailer'
 export class ContactController {
     async sendForm(req, res, next) {
         try {
+            // TODO: Email ska vara frivilligt att fylla i. 
             const { fname, email, contactType, message, recipientEmail } = req.body
             console.log(recipientEmail)
 
