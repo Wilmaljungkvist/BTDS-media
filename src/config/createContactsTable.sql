@@ -1,8 +1,0 @@
-CREATE TABLE IF NOT EXISTS contacts (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    fname VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    contactType VARCHAR(255) NOT NULL,
-    message VARCHAR(255) NOT NULL,
-    recipientEmail VARCHAR(255) NOT NULL
-);

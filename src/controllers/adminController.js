@@ -4,7 +4,7 @@
  * @author Wilma Ljungkvist
  */
 
-import AuthModel from '../models/AuthModel.js'
+import { AuthModel } from '../models/AuthModel.js'
 /**
  * Encapsulates a controller.
  */

@@ -1,42 +1,35 @@
-import { connectDB } from '../config/mysql.js'
+import mongoose from 'mongoose'
+import validator from 'validator'
+import { BASE_SCHEMA } from './baseSchema.js'
 
-const ContactModel = {}
+const { isEmail } = validator;
 
-ContactModel.addContact = async function (contactData) {
-    const { fname, email, contactType, message, recipientEmail } = contactData
-  
-    const createContactQuery = `INSERT INTO contacts (fname, email, contactType, message, recipientEmail) VALUES (?, ?, ?, ?, ?)`
-    const values = [fname, email, contactType, message, recipientEmail]
-  
-    return new Promise((resolve, reject) => {
-      connectDB.query(createContactQuery, values, (err, results) => {
-        if (err) {
-          reject(err)
-        } else {
-          resolve(results)
-        }
-      })
-    })
+const contactSchema = new mongoose.Schema({
+  firstName: {
+    type: String,
+    required: [true, 'A name is required'],
+    trim: true
+  },
+  email: {
+    type: String,
+    required: [false, 'Email address is required.'],
+    trim: true,
+    validate: [isEmail, 'Please provide a valid email address.']
+  },
+  contactType: {
+    type: String,
+    required: [true, 'Contact type is required.']
+  },
+  message: {
+    type: String,
+    required: [true, 'Message is required.']
+  },
+  recipientEmail: {
+    type: String,
+    required: [true, 'Recipient email address is required.']
   }
+})
 
+contactSchema.add(BASE_SCHEMA)
 
-  ContactModel.getContact = async function () {
-    const getContactQuery = `SELECT * FROM contacts`
-    return new Promise((resolve, reject) => {
-      connectDB.query(getContactQuery, async (err, results) => {
-        if (err) {
-          reject(err)
-        } else {
-          if (results.length === 0) {
-            reject(new Error('No contacts'))
-          } else {
-            resolve(results)
-          }
-        } 
-      })
-    })
-  }
-
-  export default ContactModel
-
-
+export const ContactModel = mongoose.model('Contact', contactSchema)

@@ -1,6 +1,6 @@
 <div class="contact-list">
     <h1>Contact List</h1>
-    <% if (contactGet.length > 0) { %>
+    <% if (contacts.length > 0) { %>
         <table>
             <thead>
                 <tr>
@@ -12,9 +12,9 @@
                 </tr>
             </thead>
             <tbody>
-                <% contactGet.forEach(contact => { %>
+                <% contacts.forEach(contact => { %>
                     <tr>
-                        <td><%= contact.fname %></td>
+                        <td><%= contact.firstName %></td>
                         <td><%= contact.email %></td>
                         <td><%= contact.contactType %></td>
                         <td><%= contact.message %></td>

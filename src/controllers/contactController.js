@@ -1,13 +1,20 @@
 import nodemailer from 'nodemailer'
-import ContactModel from '../models/contactModel.js'
+import { ContactModel } from '../models/contactModel.js'
 
 export class ContactController {
     async sendForm(req, res, next) {
         try {
-            // TODO: Email ska vara frivilligt att fylla i. 
             const { fname, email, contactType, message, recipientEmail } = req.body
 
-            const contact = await ContactModel.addContact(req.body)
+            const contactModel = await ContactModel.create({
+                firstName: fname,
+                email: email,
+                contactType: contactType,
+                message: message,
+                recipientEmail: recipientEmail
+              })
+
+            console.log(contactModel)
 
             const transporter = nodemailer.createTransport({
                 host: 'smtp.gmail.com',
@@ -17,7 +24,7 @@ export class ContactController {
                     user: process.env.EMAIL,
                     pass: process.env.PASSWORD
                 }
-            })
+            });
 
             const mailOptions = {
                 from: process.env.EMAIL,
@@ -48,23 +55,27 @@ export class ContactController {
     }
 
     async getContacts(req, res, next) {
-        const contactGet = await ContactModel.getContact()
+        try {
+            const contacts = await ContactModel.find()
 
-        const translatedContacts = contactGet.map(contact => {
-            if (contact.contactType === 'podRequest') {
-                contact.contactType = 'Önskemål'
-            } else if (contact.contactType === 'question') {
-                contact.contactType = 'Fråga'
-            }
-            return contact
-        })
+            console.log(contacts)
 
-        console.log(translatedContacts)
+            const translatedContacts = contacts.map(contact => {
+                if (contact.contactType === 'podRequest') {
+                    contact.contactType = 'Önskemål'
+                } else if (contact.contactType === 'question') {
+                    contact.contactType = 'Fråga'
+                }
+                return contact
+            })
 
+            console.log(translatedContacts)
 
-        const logo = '/img/BDTSMedia.png'
-        let type = 'home'
-        res.render('admin/contacts', { logo, type, contactGet })
-         
+            const logo = '/img/BDTSMedia.png'
+            let type = 'home'
+            res.render('admin/contacts', { logo, type, contacts })
+        } catch (error) {
+            next(error)
+        }
     }
 }

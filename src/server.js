@@ -8,9 +8,10 @@ import logger from 'morgan'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { router } from './routes/router.js'
-import { initializeDB } from './config/mysql.js'
+import { connectToDatabase } from './config/mongoose.js'
+import { morganLogger } from './config/morgan.js'
 try {
-  await initializeDB()
+  await connectToDatabase(process.env.DB_CONNECTION_STRING)
 
   const directoryFullName = dirname(fileURLToPath(import.meta.url))
 
@@ -19,6 +20,7 @@ try {
   const baseURL = process.env.BASE_URL || '/'
 
   app.use(logger('dev'))
+  app.use(morganLogger)
 
   app.use(httpContext.middleware)
 
