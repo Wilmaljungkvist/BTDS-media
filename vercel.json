@@ -1,1 +1,10 @@
-{ "version": 2, "rewrites": [{ "source": "/(.*)", "destination": "/api" }] }
+{
+    "version": 2,
+    "functions": {
+      "api/**/*.js": {
+        "runtime": "nodejs14.x",
+        "includeFiles": "src/**/*"
+      }
+    }
+  }
+  

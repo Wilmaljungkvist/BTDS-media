@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon --inspect -r dotenv/config api/index.js",
+    "dev": "nodemon --inspect -r dotenv/config src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm install"
   },
