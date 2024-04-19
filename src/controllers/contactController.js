@@ -1,10 +1,13 @@
 import nodemailer from 'nodemailer'
+import ContactModel from '../models/contactModel.js'
 
 export class ContactController {
     async sendForm(req, res, next) {
         try {
+            // TODO: Email ska vara frivilligt att fylla i. 
             const { fname, email, contactType, message, recipientEmail } = req.body
-            console.log(recipientEmail)
+
+            const contact = await ContactModel.addContact(req.body)
 
             const transporter = nodemailer.createTransport({
                 host: 'smtp.gmail.com',
@@ -42,5 +45,26 @@ export class ContactController {
         } catch (error) {
             next(error)
         }
+    }
+
+    async getContacts(req, res, next) {
+        const contactGet = await ContactModel.getContact()
+
+        const translatedContacts = contactGet.map(contact => {
+            if (contact.contactType === 'podRequest') {
+                contact.contactType = 'Önskemål'
+            } else if (contact.contactType === 'question') {
+                contact.contactType = 'Fråga'
+            }
+            return contact
+        })
+
+        console.log(translatedContacts)
+
+
+        const logo = '/img/BDTSMedia.png'
+        let type = 'home'
+        res.render('admin/contacts', { logo, type, contactGet })
+         
     }
 }

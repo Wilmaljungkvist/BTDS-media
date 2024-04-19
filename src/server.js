@@ -8,7 +8,10 @@ import logger from 'morgan'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { router } from './routes/router.js'
+import { initializeDB } from './config/mysql.js'
 try {
+  await initializeDB()
+
   const directoryFullName = dirname(fileURLToPath(import.meta.url))
 
   const app = express()

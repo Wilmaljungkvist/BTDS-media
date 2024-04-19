@@ -1,27 +1,36 @@
 <img src="/img/BDTSBanner.png" alt="" class="home-image">
 <div class="container-home">
-    <p>1. Main page</p>
+  <h3>BDTS media</h3>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum tenetur error, alias cumque consequuntur ea magnam culpa quos suscipit amet eum officiis modi nisi iusto deleniti. Temporibus officiis deleniti ullam!</p>
+
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum tenetur error, alias cumque consequuntur ea magnam culpa quos suscipit amet eum officiis modi nisi iusto deleniti. Temporibus officiis deleniti ullam! Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam tempora aperiam veniam expedita, qui totam libero aliquam officia, exercitationem fuga illo labore ab debitis esse repellat voluptates perspiciatis atque laborum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam animi placeat officia exercitationem veniam sit, nostrum natus vel nam saepe fugit qui nulla deserunt sint est dolores illum alias aperiam? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem possimus error ipsum officiis illo eius obcaecati sequi pariatur aut, deleniti provident, suscipit at tenetur? Dignissimos, sequi beatae. Atque, odio porro?</p>
+
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum tenetur error, alias cumque consequuntur ea magnam culpa quos suscipit amet eum officiis modi nisi iusto deleniti. Temporibus officiis deleniti ullam!</p>
   </div>
 
   <div class="contact">
     <h2>Kontakta oss - BDTS media</h2>
     <form action="/send-form" method="post">
         <div class="form-group">
-            <label for="fname">Namn:</label><br>
+          <div class="form-group">
+            <label for="fname">Namn*:</label><br>
             <input type="text" id="fname" name="fname" required><br>
         </div>
         <div class="form-group">
             <label for="mail">Email:</label><br>
-            <input type="email" id="mail" name="email" required><br>
+            <input type="email" id="mail" name="email"><br>
         </div>
         <div class="form-group">
+            <label for="radio">Kontaktorsak:*</label><br>
             <input type="radio" id="question" name="contactType" value="question" required>
             <label for="question">Fråga</label><br>
             <input type="radio" id="podRequest" name="contactType" value="podRequest" required>
             <label for="podRequest">Önskemål till podd</label><br>
+            <input type="radio" id="feedback" name="contactType" value="feedback" required>
+            <label for="podRequest">Feedback</label><br>
         </div>
         <div class="form-group">
-            <label for="message">Meddelande:</label><br>
+            <label for="message">Meddelande:*</label><br>
             <textarea id="message" name="message" cols="30" rows="10" required></textarea><br>
         </div>
         <div class="form-group"> 
@@ -30,4 +39,5 @@
             <input type="submit" value="Skicka">
         </div>
     </form>
+</div>
 </div>
