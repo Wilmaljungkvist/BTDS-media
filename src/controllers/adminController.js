@@ -5,6 +5,7 @@
  */
 
 import { AuthModel } from '../models/AuthModel.js'
+import { ContactModel } from '../models/contactModel.js'
 import bcrypt from 'bcrypt'
 /**
  * Encapsulates a controller.
@@ -100,6 +101,24 @@ export class AdminController {
             console.error('Error adding user:', error)
           }
         }
+
+
+        async deleteContact(req, res, next) {
+          try {
+              const contactId = req.params.id
+              const deletedContact = await ContactModel.findByIdAndDelete(contactId)
+              
+              if (!deletedContact) {
+                  req.session.flash = { type: 'danger', text: 'Contact not found' }
+                  return res.redirect('/contacts')
+              }
+              
+              req.session.flash = { type: 'success', text: 'Contact deleted successfully!' }
+              res.redirect('/contacts')
+          } catch (error) {
+              next(error)
+          }
+      }
 
         
   /**
