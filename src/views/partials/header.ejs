@@ -15,7 +15,25 @@
         </li>
       </ul>
     </div>
-    <% } else { %>
+    <% } else if (type === 'admin') { %>
+      <a class="navbar-brand" href="/contacts>"> Admin</a>
+      <div class="collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/contacts">Podcasts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contacts">Kontakt</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contacts">Uppdatera webbsidan</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Logga ut</a>
+          </li>
+        </ul>
+      </div>
+    <% }  else { %>
       <a class="navbar-brand" href="/<%= type %>"> <img src="<%= logo %>" alt="" class="<%= type %>"></a>
       <div class="collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -30,6 +48,6 @@
           </li>
         </ul>
       </div>
-    <% } %>
+      <% }  %>
   </nav>
 </header>

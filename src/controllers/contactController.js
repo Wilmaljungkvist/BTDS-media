@@ -24,7 +24,7 @@ export class ContactController {
                     user: process.env.EMAIL,
                     pass: process.env.PASSWORD
                 }
-            });
+            })
 
             const mailOptions = {
                 from: process.env.EMAIL,
@@ -59,7 +59,6 @@ export class ContactController {
             // IMPLEMETERA RATE LIMIT FÖR KONATKT.
             const contacts = await ContactModel.find()
 
-            console.log(contacts)
 
             const translatedContacts = contacts.map(contact => {
                 if (contact.contactType === 'podRequest') {
@@ -70,10 +69,8 @@ export class ContactController {
                 return contact
             })
 
-            console.log(translatedContacts)
-
             const logo = '/img/BDTSMedia.png'
-            let type = 'home'
+            let type = 'admin'
             res.render('admin/contacts', { logo, type, contacts })
         } catch (error) {
             next(error)

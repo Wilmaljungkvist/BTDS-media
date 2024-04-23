@@ -49,7 +49,6 @@ export class AdminController {
             this.session.userid = req.body.username
             req.session.flash = { type: 'success', text: 'Login succesfully.' }
             req.session.user = existingUser
-            console.log("it worked")
             res.redirect('/contacts')
           } else {
             req.session.flash = { type: 'danger', text: 'Wrong username and/or password' }
@@ -101,5 +100,23 @@ export class AdminController {
             console.error('Error adding user:', error)
           }
         }
+
+        
+  /**
+   * Destroys the users session.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   */
+  async logoutUser (req, res, next) {
+    const loggedIn = await req.session.user
+    if (loggedIn) {
+      delete req.session.user
+      req.session.flash = { type: 'success', text: 'Logout successful!' }
+      res.redirect('/admin')
+    } else {
+      res.status(404).send('Not found')
+    }
+  }
   }
   
