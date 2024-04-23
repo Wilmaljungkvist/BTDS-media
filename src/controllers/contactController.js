@@ -56,6 +56,7 @@ export class ContactController {
 
     async getContacts(req, res, next) {
         try {
+            // IMPLEMETERA RATE LIMIT FÖR KONATKT.
             const contacts = await ContactModel.find()
 
             console.log(contacts)

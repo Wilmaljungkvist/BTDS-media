@@ -32,7 +32,30 @@ export class AdminController {
   
     async loginAdmin(req, res, next) {
       try {
-        const existingUser = await User.findOne({ username: req.body.name })
+        const existingUser = await AuthModel.findOne({ username: req.body.username })
+
+        if (!existingUser) {
+          req.session.flash = { type: 'danger', text: 'Wrong username and/or password' }
+          res.redirect('/admin')
+        }
+
+        if (existingUser) {
+          const userPass = await AuthModel.findOne({ username: req.body.username }, { password: 1 })
+          const hashedPass = await bcrypt.compare(req.body.password, userPass.password)
+          console.log(hashedPass)
+  
+          if (hashedPass) {
+            this.session = req.session
+            this.session.userid = req.body.username
+            req.session.flash = { type: 'success', text: 'Login succesfully.' }
+            req.session.user = existingUser
+            console.log("it worked")
+            res.redirect('/contacts')
+          } else {
+            req.session.flash = { type: 'danger', text: 'Wrong username and/or password' }
+            res.redirect('/admin')
+          }
+        }
 
 
         const logo = '/img/BDTSMedia.png'
@@ -61,10 +84,9 @@ export class AdminController {
               req.session.flash = { type: 'danger', text: 'Username already exists' }
               res.redirect('/admin')
             } else {
-              const hashedPassword = await bcrypt.hash(userData.password, 10)
               const user = new AuthModel({
                 username: userData.username,
-                password: hashedPassword,
+                password: userData.password,
                 firstName: userData.firstName,
                 lastName: userData.lastName,
                 email: userData.email
