@@ -78,18 +78,21 @@ export class AdminController {
             password: 'password123'
           }
 
-          const existingUser = await AuthModel.findOne({ username: userData.username })
+          await AuthModel.findOneAndDelete({ username: 'johndoe' })
+
+
+          const existingUser = await AuthModel.findOne({ username: req.body.username })
 
             if (existingUser) {
               req.session.flash = { type: 'danger', text: 'Username already exists' }
               res.redirect('/admin')
             } else {
               const user = new AuthModel({
-                username: userData.username,
-                password: userData.password,
-                firstName: userData.firstName,
-                lastName: userData.lastName,
-                email: userData.email
+                username: req.body.username,
+                password: req.body.password,
+                firstName: req.body.firstname,
+                lastName: req.body.lastname,
+                email: req.body.email
               })
       
               await user.save()
@@ -98,6 +101,7 @@ export class AdminController {
               res.redirect('/admin')
             }
           } catch (error) {
+            req.session.flash = { type: 'danger', text: error }
             console.error('Error adding user:', error)
           }
         }
@@ -125,7 +129,7 @@ export class AdminController {
         try {
           const logo = '/img/BDTSMedia.png'
           let type = 'admin'
-          res.render('admin/register', { logo, type, contacts })
+          res.render('admin/register', { logo, type })
       } catch (error) {
           next(error)
       }
