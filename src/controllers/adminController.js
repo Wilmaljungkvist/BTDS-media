@@ -120,6 +120,17 @@ export class AdminController {
           }
       }
 
+
+      async registerPage(req, res, next) {
+        try {
+          const logo = '/img/BDTSMedia.png'
+          let type = 'admin'
+          res.render('admin/register', { logo, type, contacts })
+      } catch (error) {
+          next(error)
+      }
+    }
+
         
   /**
    * Destroys the users session.

@@ -1,5 +1,5 @@
 <div class="contact-list">
-    <h1>Contact List</h1>
+    <h1>Kontakt lista</h1>
     <% if (contacts.length > 0) { %>
         <table>
             <thead>
@@ -22,7 +22,7 @@
                         <td><%= contact.recipientEmail %></td>
                         <td>
                             <form action="/admin/contacts/<%= contact._id %>" method="POST">
-                                <button type="submit">Delete</button>
+                                <button type="submit">Radera</button>
                             </form>
                         </td>
                     </tr>
@@ -30,6 +30,6 @@
             </tbody>
         </table>
     <% } else { %>
-        <p>No contacts available.</p>
+        <p>Inga kontakter tillgängliga</p>
     <% } %>
 </div>
