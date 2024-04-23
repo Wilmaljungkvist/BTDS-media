@@ -5,6 +5,7 @@
  */
 
 import { AuthModel } from '../models/AuthModel.js'
+import bcrypt from 'bcrypt'
 /**
  * Encapsulates a controller.
  */
@@ -31,6 +32,9 @@ export class AdminController {
   
     async loginAdmin(req, res, next) {
       try {
+        const existingUser = await User.findOne({ username: req.body.name })
+
+
         const logo = '/img/BDTSMedia.png'
         let type = 'home'
         res.render('information/index', { logo, type })
@@ -42,17 +46,35 @@ export class AdminController {
 
     async registerUser(req, res, next) {
         try {
-            const userData = {
-              firstName: 'John',
-              lastName: 'Doe',
-              email: 'john@example.com',
-              username: 'johndoe',
-              password: 'password123'
+
+          const userData = {
+            firstName: 'John',
+            lastName: 'Doe',
+            email: 'john@example.com',
+            username: 'johndoe',
+            password: 'password123'
+          }
+
+          const existingUser = await AuthModel.findOne({ username: userData.username })
+
+            if (existingUser) {
+              req.session.flash = { type: 'danger', text: 'Username already exists' }
+              res.redirect('/admin')
+            } else {
+              const hashedPassword = await bcrypt.hash(userData.password, 10)
+              const user = new AuthModel({
+                username: userData.username,
+                password: hashedPassword,
+                firstName: userData.firstName,
+                lastName: userData.lastName,
+                email: userData.email
+              })
+      
+              await user.save()
+      
+              req.session.flash = { type: 'success', text: 'The User was created successfully' }
+              res.redirect('/admin')
             }
-        
-            const userId = await AuthModel.register(userData)
-        
-            console.log('User added successfully! User ID:', userId)
           } catch (error) {
             console.error('Error adding user:', error)
           }
