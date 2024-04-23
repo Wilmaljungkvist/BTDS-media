@@ -91,17 +91,6 @@
     background-color: #f8d7da;
     border-color: #f5c6cb;
   }
-
-  .container-admin {
-    background-color: #fff;
-    width: 95%;
-    float: left; 
-    margin: 50px 0;
-    margin-left: 10px; 
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
   
   .container-home {
     background-color: #fff;
@@ -312,6 +301,51 @@
   text-align: center;
   font-size: 18px;
   color: #999;
+}
+
+.container-admin {
+  background-color: #fff;
+  width: 50%;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container-admin h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.admin-login-form .form-group {
+  margin-bottom: 20px;
+}
+
+.admin-login-form label {
+  display: block;
+  font-weight: bold;
+}
+
+.admin-login-form input[type="text"],
+.admin-login-form input[type="password"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.admin-login-form input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.admin-login-form input[type="submit"]:hover {
+  background-color: #555;
 }
 
 
