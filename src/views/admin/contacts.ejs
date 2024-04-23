@@ -9,6 +9,7 @@
                     <th>Kontaktorsak</th>
                     <th>Meddelande</th>
                     <th>Skickat mail till:</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,6 +20,11 @@
                         <td><%= contact.contactType %></td>
                         <td><%= contact.message %></td>
                         <td><%= contact.recipientEmail %></td>
+                        <td>
+                            <form action="/admin/contacts/<%= contact._id %>" method="POST">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
                     </tr>
                 <% }) %>
             </tbody>
