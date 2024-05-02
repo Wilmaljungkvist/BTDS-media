@@ -164,7 +164,10 @@ export class AdminController {
   async forgotPassword (req, res, next) {
     try {
       const { email } = req.body
-      const token = crypto.randomBytes(20).toString('hex')
+      const user = await AuthModel.findOne({ email })
+
+      if (user !== null) {
+        const token = crypto.randomBytes(20).toString('hex')
       await AuthModel.findOneAndUpdate({ email }, { resetPasswordToken: token, resetPasswordExpires: Date.now() + 3600000 })
       const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
@@ -197,6 +200,7 @@ export class AdminController {
         res.redirect('/')
       }
     })
+      }
       const logo = '/img/BDTSMedia.png'
       let type = 'home'
       res.render('admin/forgotPasswordText', { logo, type, email })
