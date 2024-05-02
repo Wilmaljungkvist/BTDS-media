@@ -35,7 +35,9 @@ const schema = new mongoose.Schema({
     required: [true, 'Password is required.'],
     minLength: [8, 'The password must be of minimum length 8 characters.'],
     maxLength: [256, 'The password must be of maximum length 256 characters.']
-  }
+  },
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
 })
 
 schema.add(BASE_SCHEMA)
