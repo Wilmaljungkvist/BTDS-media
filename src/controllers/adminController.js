@@ -7,6 +7,8 @@
 import { AuthModel } from '../models/AuthModel.js'
 import { ContactModel } from '../models/contactModel.js'
 import bcrypt from 'bcrypt'
+import { JsonWebToken } from '../lib/JsonWebToken.js'
+import nodemailer from 'nodemailer'
 /**
  * Encapsulates a controller.
  */
@@ -70,17 +72,6 @@ export class AdminController {
     async registerUser(req, res, next) {
         try {
 
-          const userData = {
-            firstName: 'John',
-            lastName: 'Doe',
-            email: 'john@example.com',
-            username: 'johndoe',
-            password: 'password123'
-          }
-
-          await AuthModel.findOneAndDelete({ username: 'johndoe' })
-
-
           const existingUser = await AuthModel.findOne({ username: req.body.username })
 
             if (existingUser) {
@@ -98,7 +89,7 @@ export class AdminController {
               await user.save()
       
               req.session.flash = { type: 'success', text: 'The User was created successfully' }
-              res.redirect('/admin')
+              res.redirect('/admins')
             }
           } catch (error) {
             req.session.flash = { type: 'danger', text: error }
@@ -123,6 +114,23 @@ export class AdminController {
               next(error)
           }
       }
+
+      async deleteAdmin(req, res, next) {
+        try {
+            const contactId = req.params.id
+            const deletedContact = await AuthModel.findByIdAndDelete(contactId)
+            
+            if (!deletedContact) {
+                req.session.flash = { type: 'danger', text: 'Contact not found' }
+                return res.redirect('/contacts')
+            }
+            
+            req.session.flash = { type: 'success', text: 'Contact deleted successfully!' }
+            res.redirect('/admins')
+        } catch (error) {
+            next(error)
+        }
+    }
 
 
       async registerPage(req, res, next) {
@@ -154,9 +162,44 @@ export class AdminController {
   }
   async forgotPassword (req, res, next) {
     try {
+      const { email } = req.body
+      const user = await User.findOne({ email })
+      const transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false,
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD
+        }
+    })
+
+    const mailOptions = {
+        from: process.env.EMAIL,
+        to: email,
+        subject: 'Återställ lösenord',
+        text: `
+            Name: ${fname}
+            Email: ${email}
+            Contact Type: ${contactType}
+            Message: ${message}
+        `
+    }
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error('Error:', error)
+            req.session.flash = { type: 'danger', text: 'Formulär kunde inte skickas' }
+            res.redirect('/')
+        } else {
+            console.log('Email sent:', info.response)
+            req.session.flash = { type: 'success', text: 'Formulär skickades korrekt!' }
+            res.redirect('/')
+        }
+    })
       const logo = '/img/BDTSMedia.png'
       let type = 'home'
-      res.render('admin/index', { logo, type })
+      res.render('admin/forgotPasswordText', { logo, type, email })
     } catch (error) {
       next(error)
     }
@@ -166,7 +209,7 @@ export class AdminController {
     try {
       const logo = '/img/BDTSMedia.png'
       let type = 'home'
-      res.render('admin/index', { logo, type })
+      res.render('admin/forgotPassword', { logo, type })
     } catch (error) {
       next(error)
     }
@@ -186,7 +229,21 @@ export class AdminController {
     try {
       const logo = '/img/BDTSMedia.png'
       let type = 'home'
-      res.render('admin/index', { logo, type })
+      res.render('admin/newPassword', { logo, type })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getAdmins (req, res, next) {
+    try {
+      const admins = await AuthModel.find()
+
+      console.log(admins)
+
+      const logo = '/img/BDTSMedia.png'
+      let type = 'admin'
+      res.render('admin/admins', { logo, type, admins })
     } catch (error) {
       next(error)
     }
