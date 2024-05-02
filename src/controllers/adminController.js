@@ -168,7 +168,9 @@ export class AdminController {
 
       if (user !== null) {
         const token = crypto.randomBytes(20).toString('hex')
-      await AuthModel.findOneAndUpdate({ email }, { resetPasswordToken: token, resetPasswordExpires: Date.now() + 3600000 })
+      user.resetPasswordToken = token
+      user.resetPasswordExpires = Date.now() + 3600000
+      await user.save()
       const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 587,
