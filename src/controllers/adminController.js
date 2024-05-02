@@ -221,20 +221,26 @@ export class AdminController {
 
   async resetPassword (req, res, next) {
     try {
-      const user = await AuthModel.findOne({
-        resetPasswordToken: req.params.token,
-        resetPasswordExpires: { $gt: Date.now() }
-      })
-      if (!user) {
-        req.session.flash = { type: 'danger', text: 'Password reset token is invalid or has expired' }
-        return res.redirect('/')
-      }
-      user.password = req.body.password;
-      user.resetPasswordToken = undefined;
-      user.resetPasswordExpires = undefined;
-      await user.save()
-      req.session.flash = { type: 'success', text: 'Password reset successful!' }
-      res.redirect('/')
+      const { token } = req.params
+    const { password } = req.body
+
+    const user = await AuthModel.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() }
+    })
+
+    if (!user) {
+      req.session.flash = { type: 'danger', text: 'Password reset token is invalid or has expired' }
+      return res.redirect('/')
+    }
+
+    user.password = password
+    user.resetPasswordToken = undefined
+    user.resetPasswordExpires = undefined
+    await user.save()
+
+    req.session.flash = { type: 'success', text: 'Password reset successful!' }
+    res.redirect('/admin')
     } catch (error) {
       next(error)
     }
