@@ -27,3 +27,7 @@ router.get('/register', protectedRoute, (req, res, next) => controller.registerP
 router.get('/logout', protectedRoute, (req, res, next) => controller.logoutUser(req, res, next))
 router.get('/admin/edit-home', protectedRoute, (req, res, next) => controller.renderEditPage(req, res, next))
 router.post('/admin/contacts/:id', protectedRoute, (req, res, next) => controller.deleteContact(req, res, next))
+router.post('/admin/forgot-password', (req, res, next) => controller.forgotPassword  (req, res, next))
+router.get('/admin/forgot-password', (req, res, next) => controller.getForgotPassword  (req, res, next))
+router.post('/admin/reset-password', (req, res, next) => controller.resetPassword  (req, res, next))
+router.get('/admin/reset-password', (req, res, next) => controller.getResetPassword  (req, res, next))

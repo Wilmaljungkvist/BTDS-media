@@ -152,5 +152,44 @@ export class AdminController {
       res.status(404).send('Not found')
     }
   }
+  async forgotPassword (req, res, next) {
+    try {
+      const logo = '/img/BDTSMedia.png'
+      let type = 'home'
+      res.render('admin/index', { logo, type })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getForgotPassword (req, res, next) {
+    try {
+      const logo = '/img/BDTSMedia.png'
+      let type = 'home'
+      res.render('admin/index', { logo, type })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async resetPassword (req, res, next) {
+    try {
+      const logo = '/img/BDTSMedia.png'
+      let type = 'home'
+      res.render('admin/index', { logo, type })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getResetPassword (req, res, next) {
+    try {
+      const logo = '/img/BDTSMedia.png'
+      let type = 'home'
+      res.render('admin/index', { logo, type })
+    } catch (error) {
+      next(error)
+    }
+  }
   }
   
