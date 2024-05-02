@@ -1,0 +1,31 @@
+<div class="contact-list">
+    <h1>Admin lista</h1>
+    <% if (admins.length > 0) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Användarnamn</th>
+                    <th>Namn</th>
+                    <th>Mail</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% admins.forEach(admin => { %>
+                    <tr <% if (admin.username === currentAdmin) { %>class="highlight"<% } %>>
+                        <td><%= admin.username %></td>
+                        <td><%= admin.firstName + ' ' + admin.lastName %></td>
+                        <td><%= admin.email %></td>
+                        <td>
+                            <form action="/admin/admins/<%= admin._id %>" method="POST">
+                                <button type="submit">Radera admin</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>Inga admins tillgängliga</p>
+    <% } %>
+</div>

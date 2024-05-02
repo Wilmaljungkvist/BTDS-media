@@ -344,8 +344,16 @@
   border-radius: 5px;
 }
 
+.admin-login-form .forgot-password-link {
+  color: black;
+}
+
 .admin-login-form input[type="submit"]:hover {
   background-color: #555;
+}
+
+.highlight {
+  background-color: lightgreen;
 }
 
 

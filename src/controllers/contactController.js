@@ -6,7 +6,7 @@ export class ContactController {
         try {
             const { fname, email, contactType, message, recipientEmail } = req.body
 
-            const contactModel = await ContactModel.create({
+            await ContactModel.create({
                 firstName: fname,
                 email: email,
                 contactType: contactType,
@@ -14,7 +14,6 @@ export class ContactController {
                 recipientEmail: recipientEmail
               })
 
-            console.log(contactModel)
 
             const transporter = nodemailer.createTransport({
                 host: 'smtp.gmail.com',
