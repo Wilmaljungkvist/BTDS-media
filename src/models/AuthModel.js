@@ -28,7 +28,7 @@ const schema = new mongoose.Schema({
     type: String,
     required: [true, 'Username is required.'],
     unique: true,
-    match: [/^[A-Za-z][A-Za-z0-9_-]{2,255}$/, 'Please provide a valid username.']
+    match: [/^[A-Za-z][A-Za-z0-9_-]{1,255}$/, 'Please provide a valid username.']
   },
   password: {
     type: String,
