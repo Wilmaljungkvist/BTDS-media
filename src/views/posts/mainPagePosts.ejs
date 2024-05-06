@@ -6,7 +6,7 @@
                 <h2><%= post.header %></h2>
                 <p><strong>Creator:</strong> <%= post.creator %></p>
                 <p><strong>Text:</strong> <%= post.text %></p>
-                <form action="/admin/posts/<%= post._id %>" method="POST">
+                <form action="/admin/main/post/<%= post._id %>" method="POST">
                     <button type="submit">Delete</button>
                 </form>
                 <form action="/admin/posts/<%= post._id %>/edit" method="GET">

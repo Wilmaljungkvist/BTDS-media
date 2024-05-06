@@ -34,6 +34,19 @@ export class PostController {
               res.redirect('/admin/main/posts')
     }
 
+    async deletePost(req, res, next) {
+      const postId = req.params.id
+              const deletedPost = await PostModel.findByIdAndDelete(postId)
+              
+              if (!deletedPost) {
+                  req.session.flash = { type: 'danger', text: 'Inlägg inte hittat' }
+                  return res.redirect('/admin/main/posts')
+              }
+              
+              req.session.flash = { type: 'success', text: 'Inlägg raderad' }
+              res.redirect('/admin/main/posts')
+}
+
     async getCreatePost(req, res, next) {
       try {
         const logo = '/img/IMG_8196.PNG'
@@ -43,5 +56,7 @@ export class PostController {
         next(error)
       }
     }
+
+
   }
   

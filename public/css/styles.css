@@ -368,16 +368,16 @@
 .post h2 {
   font-size: 24px;
   margin-bottom: 10px;
-  color: #333; /* Adjusting text color */
-  text-align: center; /* Aligning text in the center */
+  color: #333;
+  text-align: center; 
 }
 
 .post p {
   font-size: 16px;
   line-height: 1.6;
   margin-bottom: 10px;
-  color: #666; /* Adjusting text color */
-  text-align: center; /* Aligning text in the center */
+  color: #666;
+  text-align: center;
 }
 
 .post .creator {
@@ -385,12 +385,10 @@
   color: #999999;
 }
 
-/* Adjusting link color */
 .post a {
   color: #007bff;
 }
 
-/* Hover effect for links */
 .post a:hover {
   text-decoration: underline;
 }
