@@ -25,6 +25,7 @@ export class PostController {
               const post = new PostModel({
                 header: req.body.header,
                 text: req.body.text,
+                htmlImage: req.body.textImage,
                 creator: req.session.user.firstName,
                 type
               })

@@ -10,7 +10,7 @@ export class PodcastController {
      */
     async index(req, res, next) {
       try {
-        const posts = await PostModel.find({ type: 'straight'})
+        const posts = await PostModel.find({ type: 'straight'}).sort({ createdAt: -1 })
         const presentation = await PostModel.find({ type: 'straightp'})
         const logo = '/img/IMG_8196.PNG'
         const type = 'straight-up'
@@ -34,7 +34,7 @@ export class PodcastController {
       try {
         const logo = '/img/Cuttingedge.png'
         const type = 'the-cutting-edge'
-        const posts = await PostModel.find({ type: 'cutting'})
+        const posts = await PostModel.find({ type: 'cutting'}).sort({ createdAt: -1 })
         const presentation = await PostModel.find({ type: 'cuttingp'})
         res.render('cuttingEdge/index', { logo, type, posts, presentation })
       } catch (error) {

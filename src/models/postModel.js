@@ -2,11 +2,6 @@ import mongoose from 'mongoose'
 import { BASE_SCHEMA } from './baseSchema.js'
 
 const postSchema = new mongoose.Schema({
-  header: {
-    type: String,
-    required: [true, 'Header is required.'],
-    trim: true
-  },
   text: {
     type: String,
     required: [true, 'Text is required.'],
@@ -19,6 +14,10 @@ const postSchema = new mongoose.Schema({
   type: {
     type: String,
     required: [true, 'Type is required.']
+  },
+  htmlImage: {
+    type: String,
+    trim: true
   }
 })
 

@@ -20,7 +20,7 @@ export class HomeController {
    */
   async index (req, res, next) {
     try {
-      const posts = await PostModel.find({ type: 'main'})
+      const posts = await PostModel.find({ type: 'main'}).sort({ createdAt: -1 })
       const presentation = await PostModel.find({ type: 'mainp'})
       const logo = '/img/BDTSMedia.png'
       let contentType = 'home'

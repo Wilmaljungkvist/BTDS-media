@@ -4,23 +4,32 @@
   <% if (presentation) { %>
     <p class="Presentation"><%= presentation[0].text %></p>
     <% } %>
+
+  
   <div class="post-list">
     <% if (posts.length > 0) { %>
         <% posts.forEach(post => { %>
-            <div class="post">
-                <h2><%= post.header %></h2>
-                <pre><p><%= post.text %></p></pre>
-                <p class="date"><strong>Skapad:</strong> <%= post.createdAt.toLocaleDateString() %> <%= post.createdAt.toLocaleTimeString() %></p>
-                <% if (post.updatedAt && post.updatedAt.getTime() !== post.createdAt.getTime()) { %>
-                    <p class="date"><strong>Uppdaterad:</strong> <%= post.updatedAt.toLocaleDateString() %> <%= post.updatedAt.toLocaleTimeString() %></p>
-                <% } %>
-                <p class="creator"><strong>Författare:</strong> <%= post.creator %></p>
+          <div class="post">
+            <h2><%= post.header %></h2>
+            <div class="post-content">
+                <div class="text-content">
+                    <pre><p><%- post.text %></p></pre>
+                </div>
+                <div class="iframe-content">
+                    <%- post.htmlImage %>
+                </div>
             </div>
+            <p class="date"><strong>Skapad:</strong> <%= post.createdAt.toLocaleDateString() %> <%= post.createdAt.toLocaleTimeString() %></p>
+            <% if (post.updatedAt && post.updatedAt.getTime() !== post.createdAt.getTime()) { %>
+                <p class="date"><strong>Uppdaterad:</strong> <%= post.updatedAt.toLocaleDateString() %> <%= post.updatedAt.toLocaleTimeString() %></p>
+            <% } %>
+            <p class="creator"><strong>Författare:</strong> <%= post.creator %></p>
+        </div>
+        
         <% }) %>
     <% } %>
   </div>
 </div>
-
 
 
 
