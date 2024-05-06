@@ -14,7 +14,7 @@ export class PostController {
         const posts = await PostModel.find({ type: 'main'})
         const logo = '/img/IMG_8196.PNG'
         const contentType = 'main'
-        res.render('posts/mainPage', { logo, type: contentType, posts })
+        res.render('posts/mainPagePosts', { logo, type: contentType, posts })
       } catch (error) {
         next(error)
       }
