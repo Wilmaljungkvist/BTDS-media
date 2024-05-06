@@ -1,6 +1,9 @@
 <img src="/img/CuttingEdgeBanner.png" alt="" class="home-image">
 <div class="container-home">
     <h3>The cutting edge</h3>
+    <% if (presentation) { %>
+        <p class="Presentation"><%= presentation[0].text %></p>
+        <% } %>
     <div class="post-list">
         <% if (posts.length > 0) { %>
             <% posts.forEach(post => { %>

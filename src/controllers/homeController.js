@@ -21,10 +21,10 @@ export class HomeController {
   async index (req, res, next) {
     try {
       const posts = await PostModel.find({ type: 'main'})
+      const presentation = await PostModel.find({ type: 'mainp'})
       const logo = '/img/BDTSMedia.png'
       let contentType = 'home'
-      console.log(posts)
-      res.render('home/index', { logo, type: contentType, posts })
+      res.render('home/index', { logo, type: contentType, posts, presentation })
     } catch (error) {
       next(error)
     }
