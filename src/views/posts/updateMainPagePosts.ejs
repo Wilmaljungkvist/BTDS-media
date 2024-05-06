@@ -1,0 +1,12 @@
+<h1>Update Post</h1>
+    <form action="/admin/post/<%= post._id %>/edit" method="POST">
+        <div>
+            <label for="header">Header:</label>
+            <input type="text" id="header" name="header" required value="<%= post.header %>">
+        </div>
+        <div>
+            <label for="text">Text:</label>
+            <textarea id="text" name="text" required><%= post.text %></textarea>
+        </div>
+        <button type="submit">Uppdatera Inlägg</button>
+    </form>

@@ -68,8 +68,6 @@ export class ContactController {
                 return contact
             })
 
-            console.log(contacts)
-
             const logo = '/img/BDTSMedia.png'
             let type = 'admin'
             res.render('admin/contacts', { logo, type, contacts })

@@ -1,11 +1,21 @@
 <img src="/img/CuttingEdgeBanner.png" alt="" class="home-image">
 <div class="container-home">
     <h3>The cutting edge</h3>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum tenetur error, alias cumque consequuntur ea magnam culpa quos suscipit amet eum officiis modi nisi iusto deleniti. Temporibus officiis deleniti ullam!</p>
-
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum tenetur error, alias cumque consequuntur ea magnam culpa quos suscipit amet eum officiis modi nisi iusto deleniti. Temporibus officiis deleniti ullam! Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam tempora aperiam veniam expedita, qui totam libero aliquam officia, exercitationem fuga illo labore ab debitis esse repellat voluptates perspiciatis atque laborum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam animi placeat officia exercitationem veniam sit, nostrum natus vel nam saepe fugit qui nulla deserunt sint est dolores illum alias aperiam? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem possimus error ipsum officiis illo eius obcaecati sequi pariatur aut, deleniti provident, suscipit at tenetur? Dignissimos, sequi beatae. Atque, odio porro?</p>
-
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum tenetur error, alias cumque consequuntur ea magnam culpa quos suscipit amet eum officiis modi nisi iusto deleniti. Temporibus officiis deleniti ullam!</p>
+    <div class="post-list">
+        <% if (posts.length > 0) { %>
+            <% posts.forEach(post => { %>
+                <div class="post">
+                    <h2><%= post.header %></h2>
+                    <pre><p><%= post.text %></p></pre>
+                    <p class="date"><strong>Skapad:</strong> <%= post.createdAt.toLocaleDateString() %> <%= post.createdAt.toLocaleTimeString() %></p>
+                    <% if (post.updatedAt && post.updatedAt.getTime() !== post.createdAt.getTime()) { %>
+                        <p class="date"><strong>Uppdaterad:</strong> <%= post.updatedAt.toLocaleDateString() %> <%= post.updatedAt.toLocaleTimeString() %></p>
+                    <% } %>
+                    <p class="creator"><strong>Författare:</strong> <%= post.creator %></p>
+                </div>
+            <% }) %>
+        <% } %>
+      </div>
   </div>
 
   <div class="contact">

@@ -45,7 +45,6 @@ export class AdminController {
         if (existingUser) {
           const userPass = await AuthModel.findOne({ username: req.body.username }, { password: 1 })
           const hashedPass = await bcrypt.compare(req.body.password, userPass.password)
-          console.log(hashedPass)
   
           if (hashedPass) {
             this.session = req.session

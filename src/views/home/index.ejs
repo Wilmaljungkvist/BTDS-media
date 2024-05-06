@@ -1,12 +1,14 @@
 <img src="/img/BDTSBanner.png" alt="" class="home-image">
 <div class="container-home">
   <h3>BDTS media</h3>
+  <p class="Presentation">BDTS Media
+    Independent media and podcast group with Benjamin, Daniel, Tim and Samuel based in central Sweden with focus on values and free speech. BDTS are as of 2024 divided in to two podcasts “Straight Up Uncensored” and “The Cutting Edge”.</p>
   <div class="post-list">
     <% if (posts.length > 0) { %>
         <% posts.forEach(post => { %>
             <div class="post">
                 <h2><%= post.header %></h2>
-                <p><%= post.text %></p>
+                <pre><p><%= post.text %></p></pre>
                 <p class="date"><strong>Skapad:</strong> <%= post.createdAt.toLocaleDateString() %> <%= post.createdAt.toLocaleTimeString() %></p>
                 <% if (post.updatedAt && post.updatedAt.getTime() !== post.createdAt.getTime()) { %>
                     <p class="date"><strong>Uppdaterad:</strong> <%= post.updatedAt.toLocaleDateString() %> <%= post.updatedAt.toLocaleTimeString() %></p>
