@@ -11,9 +11,17 @@ export const router = express.Router()
 
 const controller = new PostController()
 
-router.get('/admin/posts', (req, res, next) => controller.index(req, res, next))
-router.get('/admin/post', (req, res, next) => controller.getCreatePost(req, res, next))
-router.post('/admin/post', (req, res, next) => controller.createPost(req, res, next))
-router.post('/admin/post/:id', (req, res, next) => controller.deletePost(req, res, next))
-router.get('/admin/post/:id/edit', (req, res, next) => controller.getUpdatePost(req, res, next))
-router.post('/admin/post/:id/edit', (req, res, next) => controller.updatePost(req, res, next))
+const protectedRoute = (req, res, next) => {
+    if (req.session.user) {
+      next()
+    } else {
+      res.status(404).send('Not Found')
+    }
+  }
+
+router.get('/admin/posts', protectedRoute, (req, res, next) => controller.index(req, res, next))
+router.get('/admin/post', protectedRoute, (req, res, next) => controller.getCreatePost(req, res, next))
+router.post('/admin/post', protectedRoute, (req, res, next) => controller.createPost(req, res, next))
+router.post('/admin/post/:id', protectedRoute, (req, res, next) => controller.deletePost(req, res, next))
+router.get('/admin/post/:id/edit', protectedRoute, (req, res, next) => controller.getUpdatePost(req, res, next))
+router.post('/admin/post/:id/edit', protectedRoute, (req, res, next) => controller.updatePost(req, res, next))
