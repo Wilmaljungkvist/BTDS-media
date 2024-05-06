@@ -1,0 +1,23 @@
+<h1>Create Post</h1>
+    <form action="/admin/main/post" method="POST">
+        <div>
+            <label for="header">Header:</label>
+            <input type="text" id="header" name="header" required>
+        </div>
+        <div>
+            <label for="text">Text:</label>
+            <textarea id="text" name="text" required></textarea>
+        </div>
+        <div>
+            <label for="creator">Creator:</label>
+            <input type="text" id="creator" name="creator" required>
+        </div>
+        <div>
+            <label for="type">Type:</label>
+            <select id="type" name="type" required>
+                <option value="main">Main</option>
+                <option value="secondary">Secondary</option>
+            </select>
+        </div>
+        <button type="submit">Create Post</button>
+    </form>

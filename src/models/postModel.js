@@ -15,9 +15,13 @@ const postSchema = new mongoose.Schema({
   creator: {
     type: String,
     required: [true, 'Creator is required.']
+  },
+  type: {
+    type: String,
+    required: [true, 'Type is required.']
   }
 })
 
-contactSchema.add(BASE_SCHEMA)
+postSchema.add(BASE_SCHEMA)
 
 export const PostModel = mongoose.model('Post', postSchema)
