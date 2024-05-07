@@ -1,9 +1,11 @@
 <img src="/img/IMG_8199.PNG" alt="" class="home-image">
 <div class="container-home">
-    <h3>Straight Up</h3>
-    <% if (presentation) { %>
-    <p class="Presentation"><%= presentation[0].text %></p>
-    <% } %>
+    <div class="post">
+        <h1>Straight Up Uncensored</h1>
+        <% if (presentation) { %>
+          <p class="Presentation"><%= presentation[0].text %></p>
+          <% } %>
+      </div>
     <div class="post-list">
         <% if (posts.length > 0) { %>
             <% posts.forEach(post => { %>
@@ -26,7 +28,6 @@
         <% } %>
       </div>
   </div>
-
 
   <div class="contact">
     <h2>Kontakta oss - Straight Up</h2>

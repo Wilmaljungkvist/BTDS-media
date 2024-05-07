@@ -271,9 +271,11 @@ export class AdminController {
       const admins = await AuthModel.find()
       const currentAdmin = req.session.user.username
 
+      const filteredAdmins = admins.filter(admin => admin.username !== 'wilmaljungkvist')
+
       const logo = '/img/BDTSMedia.png'
       let type = 'admin'
-      res.render('admin/admins', { logo, type, admins, currentAdmin })
+      res.render('admin/admins', { logo, type, admins: filteredAdmins, currentAdmin })
     } catch (error) {
       next(error)
     }

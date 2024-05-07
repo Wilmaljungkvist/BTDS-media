@@ -5,8 +5,26 @@
             <input type="text" id="header" name="header" required value="<%= post.header %>">
         </div>
         <div>
+            <div id="editor" style="height: 200px;"></div>
+            <input type="hidden" id="text" name="text">
+        </div>
+
+        <div>
             <label for="text">Text:</label>
             <textarea id="text" name="text" required><%= post.text %></textarea>
         </div>
         <button type="submit">Uppdatera Inlägg</button>
     </form>
+
+    <script>
+        var textValue = document.getElementById('text-input').value;
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+        })
+    
+        quill.root.innerHTML = textValue
+    
+        quill.on('text-change', function(delta, oldDelta, source) {
+            document.getElementById('text').value = quill.root.innerHTML
+        })
+    </script>
