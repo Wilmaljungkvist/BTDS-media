@@ -469,3 +469,45 @@ pre {
 #createPost button[type="submit"]:hover {
   background-color: #555;
 }
+
+
+/* Styling the created posts section */
+.created-posts {
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.created-posts h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.created-posts form {
+  margin-bottom: 20px;
+}
+
+.created-posts label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.created-posts select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.created-posts button[type="submit"] {
+  padding: 10px 20px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.created-posts button[type="submit"]:hover {
+  background-color: #555;
+}
