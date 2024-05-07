@@ -16,7 +16,8 @@ const protectedRoute = (req, res, next) => {
     if (req.session.user) {
       next()
     } else {
-      res.status(404).send('Not Found')
+      req.session.flash = { type: 'danger', text: 'Inte inloggad!' }
+      res.redirect('/')
     }
   }
 
