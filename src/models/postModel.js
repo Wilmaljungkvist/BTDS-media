@@ -4,7 +4,6 @@ import { BASE_SCHEMA } from './baseSchema.js'
 const postSchema = new mongoose.Schema({
   text: {
     type: String,
-    required: [true, 'Text is required.'],
     trim: true
   },
   creator: {

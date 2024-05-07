@@ -11,7 +11,12 @@ export class PostController {
      */
     async index(req, res, next) {
       try {
-        const posts = await PostModel.find({ type: req.query.postType })
+        let posts
+        if (req.query.postType) {
+          posts = await PostModel.find({ type: req.query.postType }).sort({ createdAt: -1 })
+        } else {
+          posts = await PostModel.find({ type: 'main' }).sort({ createdAt: -1 })
+        }
         const logo = '/img/IMG_8196.PNG'
         const contentType = 'main'
         res.render('posts/mainPagePosts', { logo, type: contentType, posts })
@@ -23,7 +28,6 @@ export class PostController {
     async createPost(req, res, next) {
       const type = req.body.type
               const post = new PostModel({
-                header: req.body.header,
                 text: req.body.text,
                 htmlImage: req.body.textImage,
                 creator: req.session.user.firstName,
@@ -83,8 +87,8 @@ export class PostController {
         return res.status(404).send("Post not found")
     }
 
-    postToUpdate.header = req.body.header
     postToUpdate.text = req.body.text
+    postToUpdate.htmlImage = req.body.textImage
     postToUpdate.creator = req.session.user.username
 
     await postToUpdate.save()

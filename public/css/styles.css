@@ -354,17 +354,37 @@ footer a:hover {
   background-color: darkgreen;
 }
 
+.post-list {
+  display: flex;
+  flex-direction: column;
+}
+
 .post {
+  display: flex;
+  flex-direction: column;
   background-color: #fff;
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added a subtle box-shadow */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
 }
 
+.post-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.text-content {
+  flex: 1;
+}
+
+.iframe-content {
+  margin-left: 20px;
+}
+
 .post:hover {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Increased the box-shadow on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .post h2 {
@@ -397,7 +417,11 @@ pre {
   padding: 10px;
 }
 
+
 #createPost {
+  padding: 30px; 
+  background-color: #fff;
+  border-radius: 10px;
   margin: 20px auto;
   width: 80%;
 }
