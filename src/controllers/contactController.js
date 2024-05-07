@@ -4,15 +4,24 @@ import { ContactModel } from '../models/contactModel.js'
 export class ContactController {
     async sendForm(req, res, next) {
         try {
-            const { fname, email, contactType, message, recipientEmail } = req.body
-
-            await ContactModel.create({
-                firstName: fname,
-                email: email,
-                contactType: contactType,
-                message: message,
-                recipientEmail: recipientEmail
-              })
+            const { fname, contactType, message, recipientEmail } = req.body
+            
+            if (req.body.email) {
+                await ContactModel.create({
+                    firstName: fname,
+                    email: req.body.email,
+                    contactType: contactType,
+                    message: message,
+                    recipientEmail: recipientEmail
+                  })
+            } else {
+                await ContactModel.create({
+                    firstName: fname,
+                    contactType: contactType,
+                    message: message,
+                    recipientEmail: recipientEmail
+                  })
+            }
 
 
             const transporter = nodemailer.createTransport({
@@ -31,7 +40,6 @@ export class ContactController {
                 subject: 'New message from your website',
                 text: `
                     Name: ${fname}
-                    Email: ${email}
                     Contact Type: ${contactType}
                     Message: ${message}
                 `
