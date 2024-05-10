@@ -23,6 +23,9 @@ export class AdminController {
      */
     async index (req, res, next) {
       try {
+        if (req.session.user) {
+          return res.redirect('/contacts')
+        }
         const logo = '/img/BDTSMedia.png'
         let type = 'home'
         res.render('admin/index', { logo, type })
