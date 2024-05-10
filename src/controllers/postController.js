@@ -1,4 +1,5 @@
 import { PostModel } from '../models/postModel.js'
+import xss from 'xss'
 
 export class PostController {
     /**
@@ -28,10 +29,10 @@ export class PostController {
     async createPost(req, res, next) {
       const type = req.body.type
               const post = new PostModel({
-                text: req.body.text,
-                htmlImage: req.body.textImage,
-                creator: req.session.user.firstName,
-                type
+                text: xss(req.body.text),
+                htmlImage: xss(req.body.textImage),
+                creator: xss(req.session.user.firstName),
+                type: xss(type)
               })
       
               await post.save()
@@ -67,9 +68,7 @@ export class PostController {
     async getUpdatePost(req, res, next) {
       try {
         const postId = req.params.id
-        console.log(postId)
         const post = await PostModel.findOne({ _id: postId })
-        console.log(post)
         const logo = '/img/IMG_8196.PNG'
         const type = 'main'
         res.render('posts/updateMainPagePosts', { logo, type, post })
@@ -87,9 +86,9 @@ export class PostController {
         return res.status(404).send("Post not found")
     }
 
-    postToUpdate.text = req.body.text
-    postToUpdate.htmlImage = req.body.textImage
-    postToUpdate.creator = req.session.user.username
+    postToUpdate.text = xss(req.body.text)
+    postToUpdate.htmlImage = xss(req.body.textImage)
+    postToUpdate.creator = xss(req.session.user.username)
 
     await postToUpdate.save()
 

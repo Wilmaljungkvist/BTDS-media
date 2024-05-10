@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer'
 import { ContactModel } from '../models/contactModel.js'
+import xss from 'xss'
 
 export class ContactController {
     async sendForm(req, res, next) {
@@ -8,18 +9,18 @@ export class ContactController {
             
             if (req.body.email) {
                 await ContactModel.create({
-                    firstName: fname,
-                    email: req.body.email,
-                    contactType: contactType,
-                    message: message,
-                    recipientEmail: recipientEmail
+                    firstName: xss(fname),
+                    email: xss(req.body.email),
+                    contactType: xss(contactType),
+                    message: xss(message),
+                    recipientEmail: xss(recipientEmail)
                   })
             } else {
                 await ContactModel.create({
-                    firstName: fname,
-                    contactType: contactType,
-                    message: message,
-                    recipientEmail: recipientEmail
+                    firstName: xss(fname),
+                    contactType: xss(contactType),
+                    message: xss(message),
+                    recipientEmail: xss(recipientEmail)
                   })
             }
 
@@ -63,7 +64,6 @@ export class ContactController {
 
     async getContacts(req, res, next) {
         try {
-            // IMPLEMETERA RATE LIMIT FÖR KONATKT.
             const contacts = await ContactModel.find()
 
 

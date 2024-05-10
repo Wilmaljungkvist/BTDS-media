@@ -153,7 +153,7 @@ export class AdminController {
     const loggedIn = await req.session.user
     if (loggedIn) {
       delete req.session.user
-      req.session.flash = { type: 'success', text: 'Lyckad inloggning!' }
+      req.session.flash = { type: 'success', text: 'Lyckad utloggning!' }
       res.redirect('/admin')
     } else {
       res.status(404).send('Not found')
