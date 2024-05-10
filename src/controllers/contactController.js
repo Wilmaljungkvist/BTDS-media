@@ -40,9 +40,7 @@ export class ContactController {
                 to: recipientEmail,
                 subject: 'New message from your website',
                 text: `
-                    Name: ${fname}
-                    Contact Type: ${contactType}
-                    Message: ${message}
+                New message from your website login to see the message: https://www.bdtsmedia.se/admin
                 `
             }
 
@@ -78,7 +76,7 @@ export class ContactController {
 
             const logo = '/img/BDTSMedia.png'
             let type = 'admin'
-            res.render('admin/contacts', { logo, type, contacts })
+            res.render('admin/contacts', { logo, type, contacts: translatedContacts })
         } catch (error) {
             next(error)
         }
