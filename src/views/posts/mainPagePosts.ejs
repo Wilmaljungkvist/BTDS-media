@@ -1,0 +1,35 @@
+<div class="created-posts">
+    <h1>Skapade inlägg</h1>
+    <form action="/admin/posts" method="GET">
+        <label for="postType">Välj typ av inlägg:</label>
+        <select name="postType" id="postType">
+            <option value="main">Main</option>
+                <option value="mainp">Main presentation</option>
+                <option value="straight">Straight up</option>
+                <option value="straightp">Straight up presentation</option>
+                <option value="cutting">The cutting edge</option>
+                <option value="cuttingp">The cutting edge presentation</option>
+        </select>
+        <button type="submit">Visa inlägg</button>
+    </form>
+    <% if (posts.length > 0) { %>
+        <% posts.forEach(post => { %>
+            <div class="post">
+                <h2><%= post.header %></h2>
+                <p><strong>Creator:</strong> <%= post.creator %></p>
+                <pre><p><strong>Text:</strong> <%- post.text %></p></pre>
+                <% if (post.htmlImage) { %>
+                    <pre><p><strong>Embedded image</strong> <%- post.htmlImage %></p></pre>
+               <% } %>
+                <form action="/admin/post/<%= post._id %>" method="POST">
+                    <button type="submit">Radera</button>
+                </form>
+                <form action="/admin/post/<%= post._id %>/edit" method="GET">
+                    <button type="submit">Uppdatera</button>
+                </form>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p>Inga inlägg finns</p>
+    <% } %>
+</div>

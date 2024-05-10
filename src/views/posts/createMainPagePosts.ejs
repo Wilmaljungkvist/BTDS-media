@@ -1,0 +1,22 @@
+<div id="createPost">
+    <h1>Skapa inlägg</h1>
+    <form action="/admin/post" method="POST">
+        <div>
+            <div id="editor" style="height: 200px; background-color: #fff;"></div>
+            <input type="hidden" id="text" name="text">
+        </div>
+        <div>
+            <label for="textImage">embedda bild:</label>
+            <textarea id="textImage" name="textImage"></textarea>
+        </div>
+        <div>
+            <label for="postType">Välj typ av inlägg:</label>
+            <select id="type" name="type" required>
+                <option value="main">Main</option>
+                <option value="straight">Straight up</option>
+                <option value="cutting">The cutting edge</option>
+            </select>
+        </div>
+        <button type="submit">Publicera inlägg</button>
+    </form>
+</div>

@@ -1,0 +1,32 @@
+  <div class="contact">
+    <h2>Kontakta oss</h2>
+    <form action="/send-form" method="post">
+        <div class="form-group">
+            <p>Vänligen fyll inte i personliga uppgifter förutom din e-postadress om du önskar svar via e-post.</p>
+            <label for="fname">Namn*:</label><br>
+            <input type="text" id="fname" name="fname" required><br>
+        </div>
+        <div class="form-group">
+            <label for="mail">E-post:</label><br>
+            <input type="email" id="mail" name="email"><br>
+        </div>
+        <div class="form-group">
+            <label for="radio">Kontaktorsak:*</label><br>
+            <input type="radio" id="question" name="contactType" value="question" required>
+            <label for="question">Fråga</label><br>
+            <input type="radio" id="podRequest" name="contactType" value="podRequest" required>
+            <label for="podRequest">Önskemål till podd</label><br>
+            <input type="radio" id="feedback" name="contactType" value="feedback" required>
+            <label for="podRequest">Feedback</label><br>
+        </div>
+        <div class="form-group">
+            <label for="message">Meddelande:*</label><br>
+            <textarea id="message" name="message" cols="30" rows="10" required></textarea><br>
+        </div>
+        <div class="form-group"> 
+          <p>Genom att skicka detta formulär godkänner du sparandet av inskrivna uppgifter. Du kan läsa mer <a href="/information">Här!</a></p><br>
+          <input type="hidden" name="recipientEmail" value="<%= process.env.CUTTING_EMAIL %>">
+            <input type="submit" value="Skicka">
+        </div>
+    </form>
+</div>

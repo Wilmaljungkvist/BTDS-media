@@ -1,3 +1,4 @@
+import { PostModel } from '../models/postModel.js'
 export class PodcastController {
     /**
      * Renders a view and sends the rendered HTML string as an HTTP response.
@@ -9,9 +10,11 @@ export class PodcastController {
      */
     async index(req, res, next) {
       try {
+        const posts = await PostModel.find({ type: 'straight'}).sort({ createdAt: -1 })
+        const presentation = await PostModel.find({ type: 'straightp'})
         const logo = '/img/IMG_8196.PNG'
         const type = 'straight-up'
-        res.render('straightUp/index', { logo, type })
+        res.render('straightUp/index', { logo, type, posts, presentation })
       } catch (error) {
         next(error)
       }
@@ -31,7 +34,9 @@ export class PodcastController {
       try {
         const logo = '/img/Cuttingedge.png'
         const type = 'the-cutting-edge'
-        res.render('cuttingEdge/index', { logo, type })
+        const posts = await PostModel.find({ type: 'cutting'}).sort({ createdAt: -1 })
+        const presentation = await PostModel.find({ type: 'cuttingp'})
+        res.render('cuttingEdge/index', { logo, type, posts, presentation })
       } catch (error) {
         next(error)
       }

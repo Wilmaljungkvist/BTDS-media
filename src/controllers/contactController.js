@@ -1,18 +1,28 @@
 import nodemailer from 'nodemailer'
 import { ContactModel } from '../models/contactModel.js'
+import xss from 'xss'
 
 export class ContactController {
     async sendForm(req, res, next) {
         try {
-            const { fname, email, contactType, message, recipientEmail } = req.body
-
-            await ContactModel.create({
-                firstName: fname,
-                email: email,
-                contactType: contactType,
-                message: message,
-                recipientEmail: recipientEmail
-              })
+            const { fname, contactType, message, recipientEmail } = req.body
+            
+            if (req.body.email) {
+                await ContactModel.create({
+                    firstName: xss(fname),
+                    email: xss(req.body.email),
+                    contactType: xss(contactType),
+                    message: xss(message),
+                    recipientEmail: xss(recipientEmail)
+                  })
+            } else {
+                await ContactModel.create({
+                    firstName: xss(fname),
+                    contactType: xss(contactType),
+                    message: xss(message),
+                    recipientEmail: xss(recipientEmail)
+                  })
+            }
 
 
             const transporter = nodemailer.createTransport({
@@ -31,7 +41,6 @@ export class ContactController {
                 subject: 'New message from your website',
                 text: `
                     Name: ${fname}
-                    Email: ${email}
                     Contact Type: ${contactType}
                     Message: ${message}
                 `
@@ -55,7 +64,6 @@ export class ContactController {
 
     async getContacts(req, res, next) {
         try {
-            // IMPLEMETERA RATE LIMIT FÖR KONATKT.
             const contacts = await ContactModel.find()
 
 
@@ -67,8 +75,6 @@ export class ContactController {
                 }
                 return contact
             })
-
-            console.log(contacts)
 
             const logo = '/img/BDTSMedia.png'
             let type = 'admin'

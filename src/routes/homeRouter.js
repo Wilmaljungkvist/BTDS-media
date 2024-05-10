@@ -12,4 +12,4 @@ export const router = express.Router()
 const controller = new HomeController()
 
 router.get('/', (req, res, next) => controller.index(req, res, next))
-router.post('/information', (req, res, next) => controller.information(req, res, next))
+router.get('/information', (req, res, next) => controller.information(req, res, next))

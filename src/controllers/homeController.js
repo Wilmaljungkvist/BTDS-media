@@ -1,3 +1,5 @@
+import { PostModel } from '../models/postModel.js'
+
 /**
  * Home controller.
  *
@@ -18,9 +20,11 @@ export class HomeController {
    */
   async index (req, res, next) {
     try {
+      const posts = await PostModel.find({ type: 'main'}).sort({ createdAt: -1 })
+      const presentation = await PostModel.find({ type: 'mainp'})
       const logo = '/img/BDTSMedia.png'
-      let type = 'home'
-      res.render('home/index', { logo, type })
+      let contentType = 'home'
+      res.render('home/index', { logo, type: contentType, posts, presentation })
     } catch (error) {
       next(error)
     }

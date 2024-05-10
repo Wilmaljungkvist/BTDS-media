@@ -1,0 +1,15 @@
+<div id="createPost">
+<h1>Uppdatera inlägg</h1>
+    <form action="/admin/post/<%= post._id %>/edit" method="POST">
+        <div>
+            <div id="editor" style="height: 200px; background-color: #fff;"><%- post.text %></div>
+            <input type="hidden" id="text" name="text">
+        </div>
+
+        <div>
+            <label for="textImage">embedda bild:</label>
+            <textarea id="textImage" name="textImage"><%= post.htmlImage %></textarea>
+        </div>
+        <button type="submit">Uppdatera Inlägg</button>
+    </form>
+</div>

@@ -45,7 +45,6 @@ export class AdminController {
         if (existingUser) {
           const userPass = await AuthModel.findOne({ username: req.body.username }, { password: 1 })
           const hashedPass = await bcrypt.compare(req.body.password, userPass.password)
-          console.log(hashedPass)
   
           if (hashedPass) {
             this.session = req.session
@@ -154,7 +153,7 @@ export class AdminController {
     const loggedIn = await req.session.user
     if (loggedIn) {
       delete req.session.user
-      req.session.flash = { type: 'success', text: 'Lyckad inloggning!' }
+      req.session.flash = { type: 'success', text: 'Lyckad utloggning!' }
       res.redirect('/admin')
     } else {
       res.status(404).send('Not found')
@@ -272,9 +271,11 @@ export class AdminController {
       const admins = await AuthModel.find()
       const currentAdmin = req.session.user.username
 
+      const filteredAdmins = admins.filter(admin => admin.username !== 'wilmaljungkvist')
+
       const logo = '/img/BDTSMedia.png'
       let type = 'admin'
-      res.render('admin/admins', { logo, type, admins, currentAdmin })
+      res.render('admin/admins', { logo, type, admins: filteredAdmins, currentAdmin })
     } catch (error) {
       next(error)
     }
