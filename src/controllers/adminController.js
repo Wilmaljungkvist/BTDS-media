@@ -34,7 +34,6 @@ export class AdminController {
       }
     }
     // TODO: CSS FOR PHONES.
-    // TODO: DIFFRENT HEADER FOR ADMIN.
   
     async loginAdmin(req, res, next) {
       try {

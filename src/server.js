@@ -23,6 +23,9 @@ try {
   app.use(logger('dev'))
   app.use(morganLogger)
 
+  app.use(cors())
+  app.use(helmet())
+
   app.use(httpContext.middleware)
 
   app.set('view engine', 'ejs')
