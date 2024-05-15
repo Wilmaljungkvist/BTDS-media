@@ -24,6 +24,15 @@ try {
   app.use(morganLogger)
 
   app.use(cors())
+  const cspOptions = {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
+      frameSrc: ["'self'", "https://www.youtube.com", "https://www.facebook.com", "https://instagram.com"],
+    },
+  }
+  
+  app.use(helmet.contentSecurityPolicy(cspOptions))
 
   app.use(httpContext.middleware)
 
