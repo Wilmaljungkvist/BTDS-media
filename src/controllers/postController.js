@@ -88,7 +88,7 @@ export class PostController {
 
     postToUpdate.text = xss(req.body.text)
     postToUpdate.htmlImage = req.body.textImage
-    postToUpdate.creator = req.session.user.username
+    postToUpdate.creator = xss(req.session.user.firstName)
 
     await postToUpdate.save()
 
