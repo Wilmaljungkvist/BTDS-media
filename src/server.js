@@ -61,19 +61,6 @@ try {
     next()
   })
 
-  app.use((req, res, next) => {
-    if (req.body) {
-        req.body = sanitize(req.body)
-    }
-    if (req.query) {
-        req.query = sanitize(req.query)
-    }
-    if (req.params) {
-        req.params = sanitize(req.params)
-    }
-    next()
-})
-
   app.use('/', router)
 
   app.use((err, req, res, next) => {
@@ -101,15 +88,4 @@ try {
 } catch (err) {
   console.error(err)
   process.exitCode = 1
-}
-
-
-function sanitize(data) {
-  const sanitizedData = {}
-  for (const key in data) {
-      if (Object.hasOwnProperty.call(data, key)) {
-          sanitizedData[key] = xss(data[key])
-      }
-  }
-  return sanitizedData
 }
