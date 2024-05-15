@@ -6,9 +6,10 @@
   "type": "module",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon --inspect -r dotenv/config src/server.js",
+    "dev": "nyc --reporter=html --reporter=text nodemon --inspect -r dotenv/config src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm install"
+    "build": "npm install",
+    "coverage": "nyc report"
   },
   "repository": {
     "type": "git",
@@ -40,5 +41,8 @@
     "nodemon": "^3.1.0",
     "validator": "^13.11.0",
     "xss": "^1.0.15"
+  },
+  "devDependencies": {
+    "nyc": "^15.1.0"
   }
 }

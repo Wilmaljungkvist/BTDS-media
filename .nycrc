@@ -1,0 +1,6 @@
+{
+  "include": ["src/**/*.js"],
+  "reporter": ["html", "text"],
+  "extension": [".js"],
+  "all": true
+}

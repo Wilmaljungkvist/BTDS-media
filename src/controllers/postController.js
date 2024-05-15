@@ -30,7 +30,7 @@ export class PostController {
       const type = req.body.type
               const post = new PostModel({
                 text: xss(req.body.text),
-                htmlImage: xss(req.body.textImage),
+                htmlImage: req.body.textImage,
                 creator: xss(req.session.user.firstName),
                 type: xss(type)
               })
@@ -87,8 +87,8 @@ export class PostController {
     }
 
     postToUpdate.text = xss(req.body.text)
-    postToUpdate.htmlImage = xss(req.body.textImage)
-    postToUpdate.creator = xss(req.session.user.username)
+    postToUpdate.htmlImage = req.body.textImage
+    postToUpdate.creator = req.session.user.username
 
     await postToUpdate.save()
 
