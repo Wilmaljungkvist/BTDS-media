@@ -9,6 +9,6 @@ const sessionSchema = new mongoose.Schema({
   }
 })
 
-contactSchema.add(BASE_SCHEMA)
+sessionSchema.add(BASE_SCHEMA)
 
 export const SessionModel = mongoose.model('Session', sessionSchema)

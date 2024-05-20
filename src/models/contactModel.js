@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import validator from 'validator'
 import { BASE_SCHEMA } from './baseSchema.js'
 
-const { isEmail } = validator;
+const { isEmail } = validator
 
 const contactSchema = new mongoose.Schema({
   firstName: {

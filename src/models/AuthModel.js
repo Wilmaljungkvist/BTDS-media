@@ -37,7 +37,7 @@ const schema = new mongoose.Schema({
     maxLength: [256, 'The password must be of maximum length 256 characters.']
   },
   resetPasswordToken: String,
-  resetPasswordExpires: Date,
+  resetPasswordExpires: Date
 })
 
 schema.add(BASE_SCHEMA)
@@ -45,22 +45,5 @@ schema.add(BASE_SCHEMA)
 schema.pre('save', async function () {
   this.password = await bcrypt.hash(this.password, 10)
 })
-
-/**
- * Authenticates a user.
- *
- * @param {string} username - The username.
- * @param {string} password - The password.
- * @returns {Promise<UserModel>} A promise that resolves with the user if authentication was successful.
- */
-schema.statics.authenticate = async function (username, password) {
-  const userDocument = await this.findOne({ username })
-
-  if (!userDocument || !(await bcrypt.compare(password, userDocument?.password))) {
-    throw new Error('Invalid credentials.')
-  }
-
-  return userDocument
-}
 
 export const AuthModel = mongoose.model('Auth', schema)

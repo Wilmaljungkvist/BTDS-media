@@ -11,15 +11,21 @@ export const router = express.Router()
 
 const controller = new AdminController()
 
-
+/**
+ * Checks if there is an active session.
+ *
+ * @param {object} req - Express request object.
+ * @param {object} res - Express response object.
+ * @param {Function} next - Express next middleware function.
+ */
 const protectedRoute = (req, res, next) => {
-    if (req.session.user) {
-      next()
-    } else {
-      req.session.flash = { type: 'danger', text: 'Inte inloggad!' }
-      res.redirect('/')
-    }
+  if (req.session.user) {
+    next()
+  } else {
+    req.session.flash = { type: 'danger', text: 'Inte inloggad!' }
+    res.redirect('/')
   }
+}
 
 router.get('/admin', (req, res, next) => controller.index(req, res, next))
 router.post('/login', (req, res, next) => controller.loginAdmin(req, res, next))
@@ -31,6 +37,6 @@ router.post('/admin/contacts/:id', protectedRoute, (req, res, next) => controlle
 router.post('/admin/admins/:id', protectedRoute, (req, res, next) => controller.deleteAdmin(req, res, next))
 router.post('/admin/forgot-password', (req, res, next) => controller.forgotPassword(req, res, next))
 router.get('/admin/forgot-password', (req, res, next) => controller.getForgotPassword(req, res, next))
-router.post('/admin/reset-password/:token', (req, res, next) => controller.resetPassword (req, res, next))
+router.post('/admin/reset-password/:token', (req, res, next) => controller.resetPassword(req, res, next))
 router.get('/admin/reset-password/:token', (req, res, next) => controller.getResetPassword(req, res, next))
 router.get('/admins', protectedRoute, (req, res, next) => controller.getAdmins(req, res, next))
