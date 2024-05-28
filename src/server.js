@@ -10,7 +10,6 @@ import { fileURLToPath } from 'node:url'
 import { router } from './routes/router.js'
 import { connectToDatabase } from './config/mongoose.js'
 import { morganLogger } from './config/morgan.js'
-import xss from 'xss'
 try {
   await connectToDatabase(process.env.DB_CONNECTION_STRING)
 
@@ -27,11 +26,11 @@ try {
   const cspOptions = {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
-      frameSrc: ["'self'", "https://www.youtube.com", "https://www.facebook.com", "https://instagram.com"],
-    },
+      scriptSrc: ["'self'", "'unsafe-inline'", 'https://cdn.jsdelivr.net'],
+      frameSrc: ["'self'", 'https://www.youtube.com', 'https://www.facebook.com', 'https://instagram.com']
+    }
   }
-  
+
   app.use(helmet.contentSecurityPolicy(cspOptions))
 
   app.use(httpContext.middleware)

@@ -19,9 +19,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Wilmaljungkvist/exjobb-2024/issues"
+    "url": "https://github.com/Wilmaljungkvist/bdts-media/issues"
   },
-  "homepage": "https://github.com/Wilmaljungkvist/exjobb-2024#readme",
+  "homepage": "https://github.com/Wilmaljungkvist/bdts-media#readme",
   "dependencies": {
     "@lnu/eslint-config": "^1.1.10",
     "bcrypt": "^5.1.1",

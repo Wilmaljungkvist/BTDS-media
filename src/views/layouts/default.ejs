@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BTDS media</title>
+  <title>BDTS Media</title>
   <base href="/" />
   <link rel="stylesheet" href="/css/styles.css" />
   <link href="https://cdn.jsdelivr.net/npm/quill@2.0.1/dist/quill.snow.css" rel="stylesheet" />
@@ -21,8 +21,6 @@
   var quill = new Quill('#editor', {
       theme: 'snow'
   })
-
-  // Add a listener to update the hidden input with Quill content
   quill.on('text-change', function() {
       document.getElementById('text').value = quill.root.innerHTML;
   })
